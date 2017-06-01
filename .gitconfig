@@ -3,7 +3,7 @@
 	name = Nate Bailey
 [core]
 	excludesfile = /Users/nathanbailey/.gitignore_global
-	editor = /usr/bin/vim
+	editor = /usr/local/bin/nvim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
