@@ -52,3 +52,11 @@ zle -N zle-line-init
 # Shell colors, type `base16_` and use suggestions to set theme
 BASE16_SHELL=$DOTFILES_DIR/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+
+alias eup="cd ~/Sites/drake && dc up -d && cd ~/Sites/barbosa && dc up -d && cd ~/Sites/mozauth-docker && dc up -d && cd ~/Sites"
+alias edown="cd ~/Sites/drake && dc down && cd ~/Sites/barbosa && dc down && cd ~/Sites/mozauth-docker && dc down && cd ~/Sites"

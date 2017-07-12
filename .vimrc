@@ -1,6 +1,8 @@
 set nocompatible
 
-let base16colorspace = 256
+" Netrw config
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
 
 " Ctrlp config
 let g:ctrlp_max_files=0
@@ -23,7 +25,7 @@ Plugin 'gmarik/vundle'	" Required
 Plugin 'chriskempson/base16-vim' " Colors
 Plugin 'vim-airline/vim-airline' " Status bar
 Plugin 'vim-airline/vim-airline-themes'
-let g:airline_theme='base16'
+let g:airline_theme='base16_eighties'
 
 " Syntax plugins
 Plugin 'kchmck/vim-coffee-script'
@@ -40,11 +42,13 @@ set number      " Show line numbers
 set relativenumber
 syntax enable   " Use syntax highlighting
 set background=dark
-colorscheme base16-eighties
+" colorscheme base16-eighties
 set cursorline
 
 Plugin 'ctrlpvim/ctrlp.vim' " Fuzzy finder
-Plugin 'christoomey/vim-tmux-navigator'
+" Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'xolox/vim-session' " Session management
+Plugin 'xolox/vim-misc' " Session management dependency
 Plugin 'terryma/vim-smooth-scroll' " Smooth scrolling
 Plugin 'rking/ag.vim' " Project search
 Plugin 'w0rp/ale' " Better linting
@@ -82,6 +86,14 @@ nnoremap N Nzz
 " Clear search highlighting on esc
 nnoremap <esc> :noh<return><esc>
 
+" Easier session navigation
+let g:session_autoload = 'no'
+let g:session_autosave = 'yes'
+nnoremap <leader>so :OpenSession
+nnoremap <leader>ss :SaveSession
+nnoremap <leader>sd :DeleteSession<CR>
+nnoremap <leader>sc :CloseSession<CR>
+
 " Change search highlighting colors
 highlight Search ctermfg=LightCyan ctermbg=DarkGray
 
@@ -103,3 +115,10 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+" Get base16 working properly
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
