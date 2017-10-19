@@ -1,8 +1,31 @@
 set nocompatible
+filetype off " Required for Vundle
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
-" Netrw config
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
+Plugin 'VundleVim/Vundle.vim' " Required
+Plugin 'chriskempson/base16-vim' " Colors
+Plugin 'vim-airline/vim-airline' " Status bar
+Plugin 'vim-airline/vim-airline-themes'
+
+" Syntax plugins
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'tpope/vim-liquid'
+Plugin 'lepture/vim-jinja'
+Plugin 'elixir-editors/vim-elixir'
+
+Plugin 'ctrlpvim/ctrlp.vim' " Fuzzy finder
+Plugin 'scrooloose/nerdtree' " File tree
+Plugin 'xolox/vim-misc' " Session management dependency
+Plugin 'terryma/vim-smooth-scroll' " Smooth scrolling
+Plugin 'rking/ag.vim' " Project search
+Plugin 'w0rp/ale' " Better linting
+Plugin 'terryma/vim-multiple-cursors' " Multiple cursors
+
+call vundle#end()
+filetype plugin indent on " Required for Vundle
 
 " Ctrlp config
 let g:ctrlp_max_files=0
@@ -15,44 +38,17 @@ set ignorecase " Better searching
 set smartcase " Better searching
 set clipboard=unnamed " Unified clipboard
 
-filetype off " Required for Vundle
-
-" Plugin preferences
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-Plugin 'gmarik/vundle'	" Required
-Plugin 'chriskempson/base16-vim' " Colors
-Plugin 'vim-airline/vim-airline' " Status bar
-Plugin 'vim-airline/vim-airline-themes'
+" Syntax
 let g:airline_theme='base16_eighties'
-
-" Syntax plugins
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'tpope/vim-liquid'
-
-" Nunjucks syntax
-Plugin 'lepture/vim-jinja'
 au BufNewFile,BufRead *.nunjucks,*.nunjs,*.njk,*.nunj set ft=jinja
 
 " Misc preferences
 set number      " Show line numbers
 set relativenumber
-syntax enable   " Use syntax highlighting
 set background=dark
-" colorscheme base16-eighties
-set cursorline
-
-Plugin 'ctrlpvim/ctrlp.vim' " Fuzzy finder
-" Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'xolox/vim-session' " Session management
-Plugin 'xolox/vim-misc' " Session management dependency
-Plugin 'terryma/vim-smooth-scroll' " Smooth scrolling
-Plugin 'rking/ag.vim' " Project search
-Plugin 'w0rp/ale' " Better linting
-Plugin 'terryma/vim-multiple-cursors' " Multiple cursors
+colorscheme base16-eighties
+syntax enable   " Use syntax highlighting
+set nocursorline
 
 " ALE config
 let g:ale_sign_error = '❗'
@@ -61,8 +57,6 @@ highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 highlight clear SignColumn
 highlight LineNr ctermfg=DarkGrey ctermbg=None
-
-filetype plugin indent on " Required for Vundle
 
 " User preferences
 set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
@@ -93,9 +87,12 @@ nnoremap <leader>so :OpenSession
 nnoremap <leader>ss :SaveSession
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
+nnoremap <C-m> :NERDTreeFind<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 " Change search highlighting colors
 highlight Search ctermfg=LightCyan ctermbg=DarkGray
+highlight CursorLine ctermfg=LightCyan ctermbg=DarkGray
 
 " Split on bottom and right by default
 set splitbelow
@@ -122,3 +119,4 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
