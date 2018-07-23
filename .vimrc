@@ -16,13 +16,18 @@ Plugin 'tpope/vim-liquid'
 Plugin 'lepture/vim-jinja'
 Plugin 'elixir-editors/vim-elixir'
 
-Plugin 'ctrlpvim/ctrlp.vim' " Fuzzy finder
+" Plugin 'ctrlpvim/ctrlp.vim' " Fuzzy finder
+Plugin 'junegunn/fzf' " Fuzzy finder
 Plugin 'scrooloose/nerdtree' " File tree
-Plugin 'xolox/vim-misc' " Session management dependency
 Plugin 'terryma/vim-smooth-scroll' " Smooth scrolling
 Plugin 'rking/ag.vim' " Project search
 Plugin 'w0rp/ale' " Better linting
 Plugin 'terryma/vim-multiple-cursors' " Multiple cursors
+Plugin 'haya14busa/incsearch.vim' " Highlight all search matches while typing
+Plugin 'Raimondi/delimitMate' " Auto-close
+Plugin 'tpope/vim-rhubarb' " Github integration
+Plugin 'tpope/vim-fugitive' " Git
+Plugin 'osyo-manga/vim-anzu' " Search status in airline
 
 call vundle#end()
 filetype plugin indent on " Required for Vundle
@@ -42,6 +47,9 @@ set clipboard=unnamed " Unified clipboard
 let g:airline_theme='base16_eighties'
 au BufNewFile,BufRead *.nunjucks,*.nunjs,*.njk,*.nunj set ft=jinja
 
+" Airline config
+let g:airline_section_y = ''
+
 " Misc preferences
 set number      " Show line numbers
 set relativenumber
@@ -53,6 +61,7 @@ set nocursorline
 " ALE config
 let g:ale_sign_error = '❗'
 let g:ale_sign_warning = '❔'
+let g:ale_sign_column_always = 1
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 highlight clear SignColumn
@@ -60,6 +69,9 @@ highlight LineNr ctermfg=DarkGrey ctermbg=None
 
 " User preferences
 set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
+
+" FZF Happiness
+nnoremap <C-p> :FZF<CR>
 
 " Simplify pane navigation
 nnoremap <C-J> <C-W><C-J>
@@ -80,19 +92,25 @@ nnoremap N Nzz
 " Clear search highlighting on esc
 nnoremap <esc> :noh<return><esc>
 
-" Easier session navigation
-let g:session_autoload = 'no'
-let g:session_autosave = 'yes'
-nnoremap <leader>so :OpenSession
-nnoremap <leader>ss :SaveSession
-nnoremap <leader>sd :DeleteSession<CR>
-nnoremap <leader>sc :CloseSession<CR>
-nnoremap <C-m> :NERDTreeFind<CR>
-nnoremap <C-n> :NERDTreeToggle<CR>
+" Highlight all search results while typing
+map / <Plug>(incsearch-forward)
+
+" NERDTree config
+nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 " Change search highlighting colors
-highlight Search ctermfg=LightCyan ctermbg=DarkGray
-highlight CursorLine ctermfg=LightCyan ctermbg=DarkGray
+" highlight Search ctermfg=LightCyan ctermbg=DarkGray
+highlight CursorLine term=reverse cterm=reverse ctermbg=DarkGray
+highlight Visual term=reverse cterm=reverse ctermbg=DarkGray
+highlight IncSearch ctermfg=Black ctermbg=White
+highlight Search term=reverse cterm=NONE ctermfg=Gray ctermbg=White
+
+" Fix weirdness
+highlight clear CursorLineNR
 
 " Split on bottom and right by default
 set splitbelow

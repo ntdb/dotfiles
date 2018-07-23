@@ -1,6 +1,7 @@
-DOTFILES_DIR="/Users/Shared/dotfiles"
+DOTFILES_DIR="/Users/natebailey/dotfiles"
 
-source $DOTFILES_DIR/antigen/antigen.zsh
+source /usr/local/share/antigen/antigen.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export ENV=development
 export PROJECT_HOME=$HOME/Sites
@@ -15,6 +16,9 @@ alias ls="pwd; ls -la -G"
 alias dps="docker ps"
 alias szs="source ~/.zshrc"
 alias dl="docker logs -f"
+alias gs="git status"
+alias gd="git diff"
+alias gf="git rebase -i HEAD~2"
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
@@ -39,12 +43,10 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
+antigen bundle popstas/zsh-command-time
 
 # Tell antigen that you're done.
 antigen apply
-
-# Setup zsh-autosuggestions
-source $DOTFILES_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Unknown what this is
 zle -N zle-line-init
@@ -60,3 +62,28 @@ export NVM_DIR="$HOME/.nvm"
 
 alias eup="cd ~/Sites/drake && dc up -d && cd ~/Sites/barbosa && dc up -d && cd ~/Sites/mozauth-docker && dc up -d && cd ~/Sites"
 alias edown="cd ~/Sites/drake && dc down && cd ~/Sites/barbosa && dc down && cd ~/Sites/mozauth-docker && dc down && cd ~/Sites"
+
+alias sshfix="eval `ssh-agent -s` && 'ssh-add -A' && 'ssh-add -K' && 'ssh-add -L'"
+
+export PATH="$HOME/.bin:$PATH"
+
+# Begin vim keybinding config
+bindkey -v
+
+function zle-line-init zle-keymap-select {
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+export KEYTIMEOUT=1
+# End vim keybinding config
+
+# fh - repeat history
+fh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
+
+export VAULT_TOKEN=$(cat $HOME/.vault-token)

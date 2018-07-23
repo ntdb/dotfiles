@@ -6,7 +6,7 @@
 	editor = /usr/local/bin/nvim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -18,5 +18,5 @@
     lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
     lt = describe --tags --abbrev=0
     rn = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline --merges"
-    prune = "!git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d"
-
+    # rn = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline | grep -v '^Merge\spull\srequest\s#([0-9]+)|\(#([0-9]+)\)$'"
+    prune = "!git branch --merged master | grep -v '^[ *]*master$' | xargs git branch -d"
