@@ -19,6 +19,7 @@ alias dl="docker logs -f"
 alias gs="git status"
 alias gd="git diff"
 alias gf="git rebase -i HEAD~2"
+alias gl="git lg"
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
@@ -60,11 +61,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 
-alias eup="cd ~/Sites/drake && dc up -d && cd ~/Sites/barbosa && dc up -d && cd ~/Sites/mozauth-docker && dc up -d && cd ~/Sites"
-alias edown="cd ~/Sites/drake && dc down && cd ~/Sites/barbosa && dc down && cd ~/Sites/mozauth-docker && dc down && cd ~/Sites"
-
-alias sshfix="eval `ssh-agent -s` && 'ssh-add -A' && 'ssh-add -K' && 'ssh-add -L'"
-
 export PATH="$HOME/.bin:$PATH"
 
 # Begin vim keybinding config
@@ -81,9 +77,14 @@ zle -N zle-keymap-select
 export KEYTIMEOUT=1
 # End vim keybinding config
 
-# fh - repeat history
+# Allows the use of fzf to search through history
 fh() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
+
+# Receives a URL as a parameter to curl and pretty-prints the JSON response
+function jsonify () {
+  curl "$@" | python -m json.tool
 }
 
 export VAULT_TOKEN=$(cat $HOME/.vault-token)

@@ -15,8 +15,11 @@
 [rerere]
 	enabled = true
 [alias]
+    # Format `git log` nicely
     lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+    # Print the most recent tag
     lt = describe --tags --abbrev=0
+    # Generate release notes by printing all merge commit messages since the last tag
     rn = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline --merges"
-    # rn = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline | grep -v '^Merge\spull\srequest\s#([0-9]+)|\(#([0-9]+)\)$'"
+    # Remove all local branches that have been merged into master
     prune = "!git branch --merged master | grep -v '^[ *]*master$' | xargs git branch -d"

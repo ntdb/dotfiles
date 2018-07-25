@@ -51,12 +51,12 @@ au BufNewFile,BufRead *.nunjucks,*.nunjs,*.njk,*.nunj set ft=jinja
 let g:airline_section_y = ''
 
 " Misc preferences
-set number      " Show line numbers
-set relativenumber
+set number " Show line numbers
+set relativenumber " Show relative line numbers on all except the current line
 set background=dark
 colorscheme base16-eighties
-syntax enable   " Use syntax highlighting
-set nocursorline
+syntax enable " Use syntax highlighting
+set nocursorline " Don't highlight the current line
 
 " ALE config
 let g:ale_sign_error = '❗'
