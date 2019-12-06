@@ -13,21 +13,18 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'tpope/vim-liquid'
-Plugin 'lepture/vim-jinja'
-Plugin 'elixir-editors/vim-elixir'
+Plugin 'lumiliet/vim-twig'
 
-" Plugin 'ctrlpvim/ctrlp.vim' " Fuzzy finder
 Plugin 'junegunn/fzf' " Fuzzy finder
 Plugin 'scrooloose/nerdtree' " File tree
 Plugin 'terryma/vim-smooth-scroll' " Smooth scrolling
 Plugin 'rking/ag.vim' " Project search
-Plugin 'w0rp/ale' " Better linting
+Plugin 'dense-analysis/ale' " Better linting
 Plugin 'terryma/vim-multiple-cursors' " Multiple cursors
 Plugin 'haya14busa/incsearch.vim' " Highlight all search matches while typing
-Plugin 'Raimondi/delimitMate' " Auto-close
-Plugin 'tpope/vim-rhubarb' " Github integration
-Plugin 'tpope/vim-fugitive' " Git
 Plugin 'osyo-manga/vim-anzu' " Search status in airline
+Plugin 'zivyangll/git-blame.vim' " Git blame in status bar
+Plugin 'FooSoft/vim-argwrap' " Make objects sensible again
 
 call vundle#end()
 filetype plugin indent on " Required for Vundle
@@ -42,6 +39,7 @@ set scrolloff=5
 set ignorecase " Better searching
 set smartcase " Better searching
 set clipboard=unnamed " Unified clipboard
+set hlsearch " Highlight search results
 
 " Syntax
 let g:airline_theme='base16_eighties'
@@ -62,6 +60,10 @@ set nocursorline " Don't highlight the current line
 let g:ale_sign_error = '❗'
 let g:ale_sign_warning = '❔'
 let g:ale_sign_column_always = 1
+let g:ale_fixers = {}
+let g:ale_fixers.javascript = ['eslint']
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 highlight clear SignColumn
@@ -89,8 +91,8 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 15, 4)<CR>
 nnoremap n nzz
 nnoremap N Nzz
 
-" Clear search highlighting on esc
-nnoremap <esc> :noh<return><esc>
+" Clear search highlighting on esc esc
+nnoremap <esc><esc> :nohl<cr>
 
 " Highlight all search results while typing
 map / <Plug>(incsearch-forward)
@@ -138,3 +140,11 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Toggle multi line vs single line object keys
+nnoremap <silent> <leader>a :ArgWrap<CR>
+let g:argwrap_padded_braces = '{'
+let g:argwrap_tail_comma = 1
+
+" Toggle git blame
+nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>

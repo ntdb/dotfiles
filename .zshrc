@@ -1,24 +1,25 @@
-DOTFILES_DIR="/Users/natebailey/dotfiles"
+DOTFILES_DIR="/Users/natebailey/Sites/dotfiles"
 
 source /usr/local/share/antigen/antigen.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export ENV=development
 export PROJECT_HOME=$HOME/Sites
 export PATH="/Users/nathanbailey/bin:$PATH"
 export PATH="$PATH:`yarn global bin`"
 export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:$(composer global config --absolute bin-dir)"
 
 # Aliases
 alias dc="docker-compose"
 alias st="subl"
 alias ls="pwd; ls -la -G"
 alias dps="docker ps"
+alias dcl="docker-compose logs -f --tail='100'"
 alias szs="source ~/.zshrc"
 alias dl="docker logs -f"
 alias gs="git status"
 alias gd="git diff"
-alias gf="git rebase -i HEAD~2"
 alias gl="git lg"
 
 # Load the oh-my-zsh's library.
@@ -30,7 +31,6 @@ antigen bundle heroku
 antigen bundle pip
 antigen bundle lein
 antigen bundle command-not-found
-antigen bundle autojump
 antigen bundle brew
 antigen bundle common-aliases
 antigen bundle compleat
@@ -68,7 +68,7 @@ bindkey -v
 
 function zle-line-init zle-keymap-select {
     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
+    # RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
     zle reset-prompt
 }
 
@@ -87,4 +87,8 @@ function jsonify () {
   curl "$@" | python -m json.tool
 }
 
+export VAULT_ADDR=https://vault.dal.moz.com:8200
 export VAULT_TOKEN=$(cat $HOME/.vault-token)
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
