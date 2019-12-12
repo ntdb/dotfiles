@@ -14,6 +14,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'tpope/vim-liquid'
 Plugin 'lumiliet/vim-twig'
+Plugin 'duganchen/vim-soy'
 
 Plugin 'junegunn/fzf' " Fuzzy finder
 Plugin 'scrooloose/nerdtree' " File tree
@@ -62,7 +63,7 @@ let g:ale_sign_warning = '❔'
 let g:ale_sign_column_always = 1
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['eslint']
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0 " Disabled for highspot/nutella
 let g:ale_completion_enabled = 1
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign

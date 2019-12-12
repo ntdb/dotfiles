@@ -1,19 +1,13 @@
 [user]
-	email = nathanaelbailey@gmail.com
-	name = Nate Bailey
+    email = nathanaelbailey@gmail.com
+    name = Nate Bailey
 [core]
-	excludesfile = /Users/nathanbailey/.gitignore_global
-	editor = /usr/local/bin/nvim
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+    excludesfile = /Users/nate.bailey/.gitignore_global
+    editor = /usr/local/bin/nvim
 [commit]
-	template = /Users/nathanbailey/.stCommitMsg
+    template = /Users/nate.bailey/.stCommitMsg
 [rerere]
-	enabled = true
+    enabled = true
 [alias]
     # Format `git log` nicely
     lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
