@@ -47,7 +47,9 @@ let g:airline_theme='base16_eighties'
 au BufNewFile,BufRead *.nunjucks,*.nunjs,*.njk,*.nunj set ft=jinja
 
 " Airline config
-let g:airline_section_y = ''
+let g:airline_section_x = '' " Do not show file type
+let g:airline_section_y = '' " Do not show file encoding
+let g:airline_section_z = '%#__accent_bold#%4l/%L %3v' " Custom line/column section
 
 " Misc preferences
 set number " Show line numbers
@@ -65,6 +67,7 @@ let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['eslint']
 let g:ale_fix_on_save = 0 " Disabled for highspot/nutella
 let g:ale_completion_enabled = 1
+let g:ale_set_highlights = 0 " Disable highlighting
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 highlight clear SignColumn
@@ -92,8 +95,8 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 15, 4)<CR>
 nnoremap n nzz
 nnoremap N Nzz
 
-" Clear search highlighting on esc esc
-nnoremap <esc><esc> :nohl<cr>
+" Clear search highlighting and status on esc esc
+nnoremap <esc><esc> :nohl<cr> :AnzuClearSearchStatus<cr>
 
 " Highlight all search results while typing
 map / <Plug>(incsearch-forward)
