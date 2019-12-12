@@ -31,9 +31,13 @@ prompt spaceship
 
 # Spaceship prompt customizations
 export SPACESHIP_PACKAGE_SHOW=false
+export SPACESHIP_GIT_BRANCH_PREFIX=''
 
 # Highspot config
 export HS_EMAIL="nate.bailey@highspot.com"
+
+# FZF config
+export FZF_DEFAULT_COMMAND='ag -g ""'
 
 # NVM config
 export NVM_DIR="$HOME/.nvm"
