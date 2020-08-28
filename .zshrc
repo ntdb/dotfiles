@@ -2,7 +2,7 @@ source /usr/local/share/antigen/antigen.zsh
 
 export ENV=development
 export PROJECT_HOME=$HOME/Sites
-export PATH="/Users/nate.bailey/bin:$PATH"
+export PATH="/Users/natebailey/bin:$PATH"
 export PATH="$PATH:`yarn global bin`"
 export PATH="$PATH:/usr/local/bin"
 
@@ -25,16 +25,9 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # Tell antigen that you're done.
 antigen apply
 
-# Set Spaceship ZSH as a prompt
+# Set Pure as the prompt
 autoload -U promptinit; promptinit
-prompt spaceship
-
-# Spaceship prompt customizations
-export SPACESHIP_PACKAGE_SHOW=false
-export SPACESHIP_GIT_BRANCH_PREFIX=''
-
-# Highspot config
-export HS_EMAIL="nate.bailey@highspot.com"
+prompt pure
 
 # FZF config
 export FZF_DEFAULT_COMMAND='ag -g ""'

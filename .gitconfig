@@ -2,10 +2,10 @@
     email = nathanaelbailey@gmail.com
     name = Nate Bailey
 [core]
-    excludesfile = /Users/nate.bailey/.gitignore_global
+    excludesfile = /Users/natebailey/.gitignore_global
     editor = /usr/local/bin/nvim
 [commit]
-    template = /Users/nate.bailey/.stCommitMsg
+    template = /Users/natebailey/.stCommitMsg
 [rerere]
     enabled = true
 [alias]
