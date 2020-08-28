@@ -1,3 +1,6 @@
+# Command Line Tools
+xcode-select --install
+
 # ZSH cleanup
 chmod -R 755 /usr/local/share/zsh
 
