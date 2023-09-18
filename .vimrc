@@ -15,6 +15,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'tpope/vim-liquid'
 Plugin 'lumiliet/vim-twig'
 Plugin 'duganchen/vim-soy'
+Plugin 'peitalin/vim-jsx-typescript'
 
 Plugin 'junegunn/fzf' " Fuzzy finder
 Plugin 'scrooloose/nerdtree' " File tree
@@ -26,6 +27,7 @@ Plugin 'haya14busa/incsearch.vim' " Highlight all search matches while typing
 Plugin 'osyo-manga/vim-anzu' " Search status in airline
 Plugin 'zivyangll/git-blame.vim' " Git blame in status bar
 Plugin 'FooSoft/vim-argwrap' " Make objects sensible again
+Plugin 'mattn/emmet-vim' " Emmet
 
 call vundle#end()
 filetype plugin indent on " Required for Vundle
@@ -41,6 +43,7 @@ set ignorecase " Better searching
 set smartcase " Better searching
 set clipboard=unnamed " Unified clipboard
 set hlsearch " Highlight search results
+" set foldmethod=indent " Folds follow indents
 
 " Syntax
 let g:airline_theme='base16_eighties'
@@ -97,6 +100,9 @@ nnoremap N Nzz
 
 " Clear search highlighting and status on esc esc
 nnoremap <esc><esc> :nohl<cr> :AnzuClearSearchStatus<cr>
+
+" Close FZF buffer on esc
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
 " Highlight all search results while typing
 map / <Plug>(incsearch-forward)
